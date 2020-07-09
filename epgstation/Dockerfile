@@ -1,8 +1,8 @@
 FROM l3tnun/epgstation:master-debian
-EXPOSE 8888
+EXPOSE 20770
 ARG CPUCORE="1"
 ENV DEV="make gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev"
-ENV FFMPEG_VERSION=4.1
+ENV FFMPEG_VERSION=4.1.6
 
 RUN apt-get update && \
     apt-get -y install $DEV && \
@@ -46,4 +46,3 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/ffmpeg_sources
-
