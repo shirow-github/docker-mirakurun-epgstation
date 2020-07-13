@@ -1,6 +1,5 @@
-FROM node:14.4.0-buster-slim
-EXPOSE 40772 9229
-WORKDIR /app
+FROM node:12-buster-slim
+EXPOSE 40772
 ENV DOCKER="YES"
 ENV DEV="libpcsclite-dev build-essential curl libssl-dev yasm libtool autoconf pkg-config gcc git g++ make automake"
 
@@ -41,12 +40,8 @@ RUN apt-get update && \
 \
     npm install pm2 -g && \
 \
-# arib-b25-stream-test
-\
-    npm install arib-b25-stream-test -g --unsafe && \
-\
 # mirakurun
-    npm install mirakurun -g --unsafe --production && \
+    npm install mirakurun -g --unsafe-perm --production && \
 \
 # 不要なパッケージを削除
 \

@@ -1,7 +1,11 @@
 version: '3.7'
 services:
     mirakurun:
-        image: chinachu/mirakurun
+        build:
+            context: mirakurun
+            args:
+                - CPUCORE=2
+        #image: chinachu/mirakurun
         cap_add:
             - SYS_ADMIN
             - SYS_NICE
@@ -9,13 +13,18 @@ services:
             - "40772:40772"
             - "9229:9229"
         volumes:
-            - ./mirakurun/conf:/app-config
-            - ./mirakurun/data:/app-data
+            - /etc/localtime:/etc/localtime:ro
+            - ./mirakurun/conf:/usr/local/etc/mirakurun
+            - ./mirakurun/data:/usr/local/var/db/mirakurun
         environment:
             TZ: "Asia/Tokyo"
         devices:
+            - /dev/pt3video0:/dev/pt3video0
+            - /dev/pt3video1:/dev/pt3video1
+            - /dev/pt3video2:/dev/pt3video2
+            - /dev/pt3video3:/dev/pt3video3
             - /dev/bus:/dev/bus
-            - /dev/dvb:/dev/dvb
+        #    - /dev/dvb:/dev/dvb
         restart: always
         logging:
             driver: json-file
@@ -58,8 +67,8 @@ services:
             - mirakurun
             - mysql
         ports:
-            - "8888:8888"
-            - "8889:8889"
+            - "20770:20770"
+            - "20771:20771"
         #user: "1000:1000"
         restart: always
 
