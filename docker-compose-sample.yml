@@ -67,8 +67,8 @@ services:
             - mirakurun
             - mysql
         ports:
-            - "20770:20770"
-            - "20771:20771"
+            - "8888:8888"
+            - "8889:8889"
         #user: "1000:1000"
         restart: always
 

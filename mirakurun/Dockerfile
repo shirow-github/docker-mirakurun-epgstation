@@ -1,5 +1,5 @@
 FROM node:12-buster-slim
-EXPOSE 40772
+EXPOSE 40772 9229
 ENV DOCKER="YES"
 ENV DEV="libpcsclite-dev build-essential curl libssl-dev yasm libtool autoconf pkg-config gcc git g++ make automake"
 
