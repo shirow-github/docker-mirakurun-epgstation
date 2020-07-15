@@ -43,7 +43,7 @@ RUN apt-get update && \
 # mirakurun
     npm install mirakurun -g --unsafe-perm --production && \
 \
-# 不要なパッケージを削除
+# Removing Unnecessary Packages
 \
     apt-get -y remove $DEV && \
     apt-get autoremove -y && \

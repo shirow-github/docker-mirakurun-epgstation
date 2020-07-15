@@ -39,7 +39,7 @@ RUN apt-get update && \
     make -j${CPUCORE} && \
     make install && \
 \
-# 不要なパッケージを削除
+# Removing Unnecessary Packages
 \
     apt-get -y remove $DEV && \
     apt-get autoremove -y && \
