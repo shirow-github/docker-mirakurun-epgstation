@@ -10,13 +10,19 @@ RUN apt-get update && \
     apt-get -y install libx265-dev libnuma-dev && \
     apt-get -y install libasound2 libass9 libvdpau1 libva-x11-2 libva-drm2 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 libvorbisenc2 libtheora0 && \
 \
-#ffmpeg build
+# ffmpeg build
 \
     mkdir /tmp/ffmpeg_sources && \
     cd /tmp/ffmpeg_sources && \
     wget http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 -O ffmpeg.tar.bz2 && \
     tar xjvf ffmpeg.tar.bz2 && \
     cd /tmp/ffmpeg_sources/ffmpeg* && \
+    \
+    # ffmpeg mpeg2 Paches
+    \
+    wget https://gist.githubusercontent.com/shirow-github/df60e627c4dcd5d62273778e04fe5ce7/raw/70addd60c5f2e561269f40f34f42f454ca4dfe13/ffmpeg-${FFMPEG_VERSION}-mpeg2.patch && \
+    patch -p0 < ffmpeg-${FFMPEG_VERSION}-mpeg2.patch && \
+    \
     ./configure \
       --prefix=/usr/local \
       --disable-shared \
