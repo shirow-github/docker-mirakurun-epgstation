@@ -4,8 +4,7 @@ services:
         build:
             context: mirakurun
             args:
-                - CPUCORE=2
-        #image: chinachu/mirakurun
+                - CPUCORE=1
         cap_add:
             - SYS_ADMIN
             - SYS_NICE
@@ -24,7 +23,7 @@ services:
             - /dev/pt3video2:/dev/pt3video2
             - /dev/pt3video3:/dev/pt3video3
             - /dev/bus:/dev/bus
-        #    - /dev/dvb:/dev/dvb
+            #- /dev/dvb:/dev/dvb
         restart: always
         logging:
             driver: json-file
@@ -63,6 +62,8 @@ services:
             - ./recorded:/app/recorded
         environment:
             TZ: "Asia/Tokyo"
+        devices:
+            - /dev/dri:/dev/dri
         depends_on:
             - mirakurun
             - mysql
