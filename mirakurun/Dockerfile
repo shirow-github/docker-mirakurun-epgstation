@@ -1,4 +1,4 @@
-FROM node:12-buster-slim
+FROM chinachu/mirakurun
 EXPOSE 40772 9229
 ENV DOCKER="YES"
 ENV DEV="libpcsclite-dev build-essential curl libssl-dev yasm libtool autoconf pkg-config gcc git g++ make automake"
@@ -36,13 +36,6 @@ RUN apt-get update && \
     make && \
     make install && \
 \
-# pm2
-\
-    npm install pm2 -g && \
-\
-# mirakurun
-    npm install mirakurun -g --unsafe-perm --production && \
-\
 # Removing Unnecessary Packages
 \
     apt-get -y remove $DEV && \
@@ -52,8 +45,3 @@ RUN apt-get update && \
     rm -rf /tmp/libpcsclite-bcas && \
     rm -rf /tmp/libarib25 && \
     rm -rf /tmp/recpt1
-
-WORKDIR /usr/local/lib/node_modules/mirakurun
-
-ENTRYPOINT /etc/init.d/pcscd start && \
-    npm start

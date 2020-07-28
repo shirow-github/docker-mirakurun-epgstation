@@ -39,6 +39,7 @@ RUN apt-get update && \
       --enable-libx264 \
       --enable-libx265 \
       --enable-nonfree \
+      --enable-vaapi \
       --disable-debug \
       --disable-doc \
     && \

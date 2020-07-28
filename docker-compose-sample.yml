@@ -13,8 +13,8 @@ services:
             - "9229:9229"
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./mirakurun/conf:/usr/local/etc/mirakurun
-            - ./mirakurun/data:/usr/local/var/db/mirakurun
+            - ./mirakurun/conf:/app-config
+            - ./mirakurun/data:/app-data
         environment:
             TZ: "Asia/Tokyo"
         devices:
@@ -23,7 +23,6 @@ services:
             - /dev/pt3video2:/dev/pt3video2
             - /dev/pt3video3:/dev/pt3video3
             - /dev/bus:/dev/bus
-            #- /dev/dvb:/dev/dvb
         restart: always
         logging:
             driver: json-file
