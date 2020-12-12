@@ -132,7 +132,7 @@
   channel: BS19_2
   serviceId: 243
   isDisabled: false
-- name: シネフィルWOWOW
+- name: WOWOWプラス
   type: BS
   channel: BS21_0
   serviceId: 252
