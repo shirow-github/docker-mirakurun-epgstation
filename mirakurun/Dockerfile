@@ -17,10 +17,10 @@ RUN apt-get update && \
     make install && \
     /sbin/ldconfig && \
 \
-# libarib25
+# libaribb25
 \
-    git clone https://github.com/shirow-github/libarib25.git /tmp/libarib25 && \
-    cd /tmp/libarib25 && \
+    git clone https://github.com/shirow-github/libaribb25.git /tmp/libaribb25 && \
+    cd /tmp/libaribb25 && \
     ./bootstrap && \
     ./configure pcsclite_CFLAGS="-I/usr/local/include/libpcsclite-bcas -I/usr/include/PCSC -pthread" pcsclite_LIBS="-L/usr/lib -lpcsclitebcas" && \
     make && \
@@ -43,5 +43,5 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/libpcsclite-bcas && \
-    rm -rf /tmp/libarib25 && \
+    rm -rf /tmp/libaribb25 && \
     rm -rf /tmp/recpt1
