@@ -44,7 +44,7 @@ RUN apt-get update && \
       --disable-doc \
     && \
     cd /tmp/ffmpeg_sources/ffmpeg* && \
-    make -j${CPUCORE} && \
+    make -j$(nproc) && \
     make install && \
 \
 # Removing Unnecessary Packages
