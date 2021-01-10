@@ -10,6 +10,7 @@
 /epgstation/thumbnail/*.jpg
 /epgstation/data/streamfiles/*.ts
 /epgstation/data/streamfiles/*.m3u8
+/epgstation/config/config.json
 /epgstation/config/*.yml
 !/epgstation/config/config.sample.yml
 !/epgstation/config/operatorLogConfig.sample.yml
