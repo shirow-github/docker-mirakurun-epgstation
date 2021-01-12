@@ -21,7 +21,7 @@ RUN apt-get update && \
     \
     # ffmpeg mpeg2 Paches
     \
-    wget https://gist.githubusercontent.com/shirow-github/df60e627c4dcd5d62273778e04fe5ce7/raw/a9f42a10097e0709a78d15a58efc0c302e925c15/ffmpeg-${FFMPEG_VERSION}-mpeg2.patch && \
+    wget https://gist.githubusercontent.com/shirow-github/df60e627c4dcd5d62273778e04fe5ce7/raw/46954fec0e9381834d88654422404eeb956466f4/ffmpeg-${FFMPEG_VERSION}-mpeg2.patch && \
     patch -p0 < ffmpeg-${FFMPEG_VERSION}-mpeg2.patch && \
     \
     ./configure \
