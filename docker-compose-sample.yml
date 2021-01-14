@@ -11,6 +11,8 @@ services:
         ports:
             - "40772:40772"
             - "9229:9229"
+        #networks:
+            #- my_network
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakurun/conf:/app-config
@@ -41,6 +43,10 @@ services:
             MYSQL_DATABASE: epgstation
             TZ: "Asia/Tokyo"
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
+        ports:
+            - "3306:3306"
+        #networks:
+            #- my_network
         restart: always
         logging:
             options:
@@ -66,6 +72,8 @@ services:
         ports:
             - "8888:8888"
             - "8889:8889"
+        #networks:
+            #- my_network
         #user: "1000:1000"
         restart: always
 
@@ -73,3 +81,7 @@ volumes:
     mysql-db:
         driver: local
 
+# docker network create my_network (optional)
+#networks:
+    #my_network:
+        #external: true
