@@ -9,8 +9,8 @@ const videoHeight = parseInt(process.env.VIDEORESOLUTION, 10);
 const isDualMono = parseInt(process.env.AUDIOCOMPONENTTYPE, 10) == 2;
 const args = ['-y'];
 
-const name = process.env.NAME;
-const desc = process.env.DESCRIPTION;
+const name = process.env.HALF_WIDTH_NAME;
+const desc = process.env.HALF_WIDTH_DESCRIPTION;
 const genre1 = process.env.GENRE1;
 
 // ジャンルによる、画質のチューニング等
@@ -94,21 +94,32 @@ const getDuration = filePath => {
 // input 設定
 Array.prototype.push.apply(args, ['-i', input]);
 
-if (isDualMono) {
-    Array.prototype.push.apply(args, [
-        '-filter_complex',
-        'channelsplit[FL][FR]',
-        '-map', '0:v',
-        '-map', '[FL]',
-        '-map', '[FR]',
-        '-metadata:s:a:0', 'language=jpn',
-        '-metadata:s:a:1', 'language=eng',
-    ]);
-    Array.prototype.push.apply(args, ['-c:a', 'ac3', '-ar', '48000', '-b:a', '256k']);
-} else {
-    // audio dataをコピー
-    Array.prototype.push.apply(args, ['-c:a', 'aac', '-ar', '48000', '-b:a', '192k']);
+// 二ヶ国語放送
+if (name.indexOf('[二]') != -1) {
+    if (isDualMono) {
+	Array.prototype.push.apply(args, [
+            '-filter_complex',
+            'channelsplit[FL][FR]',
+            '-map', '0:v',
+            '-map', '[FL]',
+            '-map', '[FR]',
+            '-metadata:s:a:0', 'language=jpn',
+            '-metadata:s:a:1', 'language=eng'
+	]);
+    } else {
+	Array.prototype.push.apply(args, [
+	    '-map', '0:0',
+	    '-map', '0:1',
+	    '-map', '0:2',
+	    '-metadata:s:a:0', 'language=jpn',
+	    '-metadata:s:a:1', 'language=eng'
+	]);
+    }
 }
+
+// audio dataをコピー
+//Array.prototype.push.apply(args, ['-c:a', 'aac', '-ar', '48000', '-b:a', '192k']);
+Array.prototype.push.apply(args, ['-c:a', 'ac3', '-ar', '48000', '-ab', '256k']);
 
 Array.prototype.push.apply(args, ['-ignore_unknown']);
 
