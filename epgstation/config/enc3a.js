@@ -118,7 +118,6 @@ if (name.indexOf('[二]') != -1) {
 }
 
 // audio dataをコピー
-//Array.prototype.push.apply(args, ['-c:a', 'aac', '-ar', '48000', '-b:a', '192k']);
 Array.prototype.push.apply(args, ['-c:a', 'ac3', '-ar', '48000', '-ab', '256k']);
 
 Array.prototype.push.apply(args, ['-ignore_unknown']);
