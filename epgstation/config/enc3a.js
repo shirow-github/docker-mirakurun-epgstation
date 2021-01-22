@@ -130,7 +130,7 @@ Array.prototype.push.apply(args, [
 	'-tune', tune,
 	'-movflags', '+faststart',
 	'-c:v', 'libx264',
-	'-crf', '23',
+	'-crf', '20',
 	'-b:v', '2500k',
 	'-f', 'mp4',
 	'-metadata', 'title=' + name,
@@ -169,6 +169,7 @@ for (let i of args) {
                 // frame= 2847 fps=0.0 q=-1.0 Lsize=  216432kB time=00:01:35.64 bitrate=18537.1kbits/s speed= 222x
                 const progress = {};
                 let tmp = (str + ' ').match(/[A-z]*=[A-z,0-9,\s,.,\/,:,-]* /g);
+                if (tmp === null) continue;
                 for (let j = 0; j < tmp.length; j++) {
                     progress[tmp[j].split('=')[0]] = tmp[j].split('=')[1].replace(/\r/g, '').trim();
                 }
