@@ -1,10 +1,7 @@
 version: '3.7'
 services:
     mirakurun:
-        build:
-            context: mirakurun
-            args:
-                - CPUCORE=1
+        build: mirakurun
         cap_add:
             - SYS_ADMIN
             - SYS_NICE
@@ -14,7 +11,6 @@ services:
         #networks:
             #- my_network
         volumes:
-            - /etc/localtime:/etc/localtime:ro
             - ./mirakurun/conf:/app-config
             - ./mirakurun/data:/app-data
         environment:
@@ -42,9 +38,7 @@ services:
             MYSQL_ROOT_PASSWORD: epgstation
             MYSQL_DATABASE: epgstation
             TZ: "Asia/Tokyo"
-        command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
-        ports:
-            - "3306:3306"
+        command: --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
         #networks:
             #- my_network
         restart: always
@@ -56,7 +50,6 @@ services:
     epgstation:
         build: epgstation
         volumes:
-            - /etc/localtime:/etc/localtime:ro
             - ./epgstation/config:/app/config
             - ./epgstation/data:/app/data
             - ./epgstation/thumbnail:/app/thumbnail
