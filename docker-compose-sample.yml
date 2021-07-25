@@ -1,26 +1,21 @@
 version: '3.7'
 services:
     mirakurun:
-        build: mirakurun
+        image: chinachu/mirakurun
         cap_add:
             - SYS_ADMIN
             - SYS_NICE
         ports:
             - "40772:40772"
             - "9229:9229"
-        #networks:
-            #- my_network
         volumes:
             - ./mirakurun/conf:/app-config
             - ./mirakurun/data:/app-data
         environment:
             TZ: "Asia/Tokyo"
         devices:
-            - /dev/pt3video0:/dev/pt3video0
-            - /dev/pt3video1:/dev/pt3video1
-            - /dev/pt3video2:/dev/pt3video2
-            - /dev/pt3video3:/dev/pt3video3
             - /dev/bus:/dev/bus
+            - /dev/dvb:/dev/dvb
         restart: always
         logging:
             driver: json-file
@@ -39,8 +34,6 @@ services:
             MYSQL_DATABASE: epgstation
             TZ: "Asia/Tokyo"
         command: --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
-        #networks:
-            #- my_network
         restart: always
         logging:
             options:
@@ -57,24 +50,18 @@ services:
             - ./recorded:/app/recorded
         environment:
             TZ: "Asia/Tokyo"
-        devices:
-            - /dev/dri:/dev/dri
         depends_on:
             - mirakurun
             - mysql
         ports:
             - "8888:8888"
             - "8889:8889"
-        #networks:
-            #- my_network
-        #user: "1000:1000"
+#         user: "1000:1000"
+#         devices:
+#             - /dev/dri:/dev/dri
         restart: always
 
 volumes:
     mysql-db:
         driver: local
 
-# docker network create my_network (optional)
-#networks:
-    #my_network:
-        #external: true

@@ -115,9 +115,7 @@ if (isDualMono) {
 }
 
 // 字幕ストリーム設定
-if (name.indexOf('[字]') != -1) {
-    Array.prototype.push.apply(args, ['-map', '0:s', '-c:s', 'mov_text', '-metadata:s:s:0', 'language=jpn']);
-}
+Array.prototype.push.apply(args, ['-map', '0:s?', '-c:s', 'mov_text', '-metadata:s:s:0', 'language=jpn']);
 
 // 品質設定
 Array.prototype.push.apply(args, [
