@@ -109,13 +109,30 @@ if (isDualMono) {
 	'-metadata:s:a:0', 'language=jpn',
 	'-metadata:s:a:1', 'language=eng'
     ]);
-    Array.prototype.push.apply(args, ['-c:a', 'aac', '-ar', '48000', '-b:a', '192k', '-ac', '2']);
+    Array.prototype.push.apply(args, [
+	'-c:a', 'aac',
+	'-ar', '48000',
+	'-b:a', '192k',
+	'-ac', '2'
+    ]);
 } else {
-    Array.prototype.push.apply(args, ['-map', '0:a', '-c:a', 'aac', '-ar', '48000', '-b:a', '192k', '-ac', '2']);
+    Array.prototype.push.apply(args, [
+	'-map', '0:a',
+	'-metadata:s:a:0', 'language=jpn',
+	'-metadata:s:a:1', 'language=eng',
+	'-c:a', 'aac',
+	'-ar', '48000',
+	'-b:a', '192k',
+	'-ac', '2'
+    ]);
 }
 
 // 字幕ストリーム設定
-Array.prototype.push.apply(args, ['-map', '0:s?', '-c:s', 'mov_text', '-metadata:s:s:0', 'language=jpn']);
+Array.prototype.push.apply(args, [
+	'-map', '0:s?',
+	'-c:s', 'mov_text',
+	'-metadata:s:s:0', 'language=jpn'
+]);
 
 // 品質設定
 Array.prototype.push.apply(args, [
