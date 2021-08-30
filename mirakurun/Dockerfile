@@ -16,6 +16,7 @@ RUN apt-get update && \
     make && \
     make install && \
     /sbin/ldconfig && \
+    cp winscard.ini.sample /usr/local/lib/winscard.ini && \
 \
 # libaribb25
 \
