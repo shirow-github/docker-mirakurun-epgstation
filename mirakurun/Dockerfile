@@ -2,7 +2,7 @@ FROM chinachu/mirakurun:latest
 EXPOSE 40772 9229
 ENV DOCKER="YES"
 ENV DEV="libpcsclite-dev build-essential curl libssl-dev yasm libtool autoconf pkg-config gcc git g++ make automake"
-ARG GITHUB_PERSONAl_ACCESS_TOKENS
+ARG GITHUB_PERSONAL_ACCESS_TOKENS
 
 RUN apt-get update && \
     apt-get -y install pcscd libpcsclite1 libccid pcsc-tools && \
@@ -10,7 +10,7 @@ RUN apt-get update && \
 \
 # libpcsclite-bcas
 \
-    git clone https://${GITHUB_PERSONAl_ACCESS_TOKENS}:x-oauth-basic@github.com/shirow-github/libpcsclite-bcas.git /tmp/libpcsclite-bcas && \
+    git clone https://${GITHUB_PERSONAL_ACCESS_TOKENS}:x-oauth-basic@github.com/shirow-github/libpcsclite-bcas.git /tmp/libpcsclite-bcas && \
     cd /tmp/libpcsclite-bcas && \
     ./bootstrap && \
     ./configure && \
