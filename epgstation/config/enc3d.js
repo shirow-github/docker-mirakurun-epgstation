@@ -12,9 +12,8 @@ const name = process.env.HALF_WIDTH_NAME;
 const desc = process.env.HALF_WIDTH_DESCRIPTION;
 const genre1 = process.env.GENRE1;
 
-// ジャンルによる、画質のチューニング等
+// 番組のジャンルを設定する
 let genre = 'その他';
-let tune = 'fastdecode,zerolatency';
 
 if (genre1 == 0) {
     genre = 'ニュース・報道';
@@ -42,12 +41,10 @@ if (genre1 == 5) {
 
 if (genre1 == 6) {
     genre = '映画';
-    tune = 'film';
 }
 
 if (genre1 == 7) {
     genre = 'アニメ・特撮';
-    tune = 'animation';
 }
 
 if (genre1 == 8) {
@@ -121,7 +118,10 @@ if (isDualMono) {
     ]);
 }
 Array.prototype.push.apply(args, [
-	'-c:a', 'aac',
+	'-c:a', 'libfdk_aac',
+	'-profile:a', 'aac_he_v2',
+	'-aac_coder', 'twoloop',
+	'-vbr', '5',
 	'-ar', '48000',
 	'-b:a', '192k',
 	'-ac', '2'
@@ -139,6 +139,7 @@ Array.prototype.push.apply(args, [
         '-threads', '0',
         '-preset', 'veryfast',
         '-movflags', '+faststart',
+        '-tune', 'ssim',
         '-crf', '21',
         '-b:v', '1500k',
         '-f', 'mp4',

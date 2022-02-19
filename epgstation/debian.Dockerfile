@@ -1,12 +1,13 @@
 FROM l3tnun/epgstation:latest
 
-ENV DEV="make gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev"
+ENV DEV="make gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev libfdk-aac-dev"
 ENV FFMPEG_VERSION="5.0"
 
-RUN apt-get update && \
+RUN sed -i.orig -r 's/^(deb.*main)$/\1 non-free contrib/g' /etc/apt/sources.list && \
+    apt-get update && \
     apt-get -y install $DEV && \
     apt-get -y install yasm libx264-dev libmp3lame-dev libopus-dev libvpx-dev && \
-    apt-get -y install libx265-dev libnuma-dev && \
+    apt-get -y install libx265-dev libnuma-dev libfdk-aac1 && \
     apt-get -y install libasound2 libass9 libvdpau1 libva-x11-2 libva-drm2 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 libvorbisenc2 libtheora0 libaribb24-dev && \
     apt-get -y install vainfo i965-va-driver intel-media-va-driver && \
 \
@@ -34,6 +35,7 @@ RUN apt-get update && \
       --enable-libaribb24 \
       --enable-nonfree \
       --enable-vaapi \
+      --enable-libfdk-aac \
       --disable-debug \
       --disable-doc \
     && \
