@@ -11,6 +11,7 @@ const args = ['-y'];
 const name = process.env.HALF_WIDTH_NAME;
 const desc = process.env.HALF_WIDTH_DESCRIPTION;
 const genre1 = process.env.GENRE1;
+const chname = process.env.HALF_WIDTH_CHANNELNAME;
 
 // 番組のジャンルを設定する
 let genre = 'その他';
@@ -87,15 +88,17 @@ const getDuration = filePath => {
     });
 };
 
+// 前番組の映像、音声ストリームが含まれている場合の対応
+Array.prototype.push.apply(args, ['-ss', '4', '-y']);
+
 // 字幕用
 Array.prototype.push.apply(args, ['-fix_sub_duration']);
 
 // input 設定
-//Array.prototype.push.apply(args, ['-ss', '15', '-y']);
 Array.prototype.push.apply(args, ['-i', input]);
 
 // ビデオストリーム設定
-Array.prototype.push.apply(args, ['-map', '0:v', '-c:v', 'libx265']);
+Array.prototype.push.apply(args, ['-map', '0:v:0', '-map', '0:v:1?', '-c:v', 'libx265']);
 
 // インターレス解除
 Array.prototype.push.apply(args, ['-vf', 'yadif,scale=-2:720']);
@@ -112,7 +115,8 @@ if (isDualMono) {
     ]);
 } else {
     Array.prototype.push.apply(args, [
-	'-map', '0:a',
+	'-map', '0:a:0',
+	'-map', '0:a:1?',
 	'-metadata:s:a:0', 'language=jpn',
 	'-metadata:s:a:1', 'language=eng'
     ]);
@@ -129,9 +133,11 @@ Array.prototype.push.apply(args, [
 
 // 字幕ストリーム設定
 Array.prototype.push.apply(args, [
-	'-map', '0:s?',
+	'-map', '0:s:0?',
+	'-map', '0:s:1?',
 	'-c:s', 'mov_text',
-	'-metadata:s:s:0', 'language=jpn'
+	'-metadata:s:s:0', 'language=jpn',
+	'-metadata:s:s:1', 'language=jpn'
 ]);
 
 // 品質設定
@@ -145,11 +151,11 @@ Array.prototype.push.apply(args, [
         '-f', 'mp4',
         '-metadata', 'title=' + name,
         '-metadata', 'comment=' + desc,
-        '-metadata', 'genre=' + genre
+        '-metadata', 'genre=' + genre,
+        '-metadata', 'artist=' + chname
 ]);
 
 // 出力ファイル
-//Array.prototype.push.apply(args, ['-loglevel', 'error']);
 Array.prototype.push.apply(args, [output]);
 
 (async () => {
