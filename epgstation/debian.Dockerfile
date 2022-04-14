@@ -1,7 +1,7 @@
 FROM l3tnun/epgstation:latest
 
 ENV DEV="make gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev libfdk-aac-dev"
-ENV FFMPEG_VERSION="5.0"
+ENV FFMPEG_VERSION="5.0.1"
 
 RUN sed -i.orig -r 's/^(deb.*main)$/\1 non-free contrib/g' /etc/apt/sources.list && \
     apt-get update && \
