@@ -3,6 +3,7 @@ EXPOSE 40772 9229
 ENV DOCKER="YES"
 ENV DEV="libpcsclite-dev build-essential curl libssl-dev yasm libtool autoconf pkg-config gcc git g++ make automake"
 ARG GITHUB_PERSONAL_ACCESS_TOKENS
+ARG TUNERS_DEVICES
 
 RUN apt-get update && \
     apt-get -y install pcscd libpcsclite1 libccid pcsc-tools && \
@@ -31,6 +32,7 @@ RUN apt-get update && \
 \
 # recpt1
 \
+    touch ${TUNERS_DEVICES} && \
     git clone https://github.com/shirow-github/recpt1.git /tmp/recpt1 && \
     cd /tmp/recpt1/recpt1 && \
     ./autogen.sh && \
