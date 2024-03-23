@@ -1,4 +1,4 @@
-*.bak
+*.bak*
 *.swp
 *.log
 *.log.*
