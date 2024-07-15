@@ -21,5 +21,6 @@
 /epgstation/data/*.json
 /epgstation/data/database.db
 /docker-compose.yml
+/compose.yaml
 /winscard.ini
 !.gitkeep
