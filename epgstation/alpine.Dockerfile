@@ -1,7 +1,7 @@
-FROM l3tnun/epgstation:v2.10.0-alpine
+FROM l3tnun/epgstation:alpine
 
 ENV DEV="autoconf automake bash binutils bzip2 cmake curl coreutils diffutils file g++ gcc gperf libtool make python3 openssl-dev tar yasm nasm zlib-dev expat-dev pkgconfig libass-dev lame-dev opus-dev libtheora-dev libvorbis-dev libvpx-dev x264-dev x265-dev libva-dev"
-ENV FFMPEG_VERSION=7.0
+ENV FFMPEG_VERSION=8.1.3
 # intel環境でハードウェアエンコードを利用したい場合は下記をコメントアウト
 # ENV LD_LIBRARY_PATH=/opt/intel/mediasdk/lib64
 # ENV PKG_CONFIG_PATH=/opt/intel/mediasdk/lib64/pkgconfig
@@ -20,7 +20,7 @@ RUN apk add --no-cache libgcc libstdc++ ca-certificates libgomp expat git lame-l
 \
 #ffmpeg build
     mkdir /tmp/ffmpeg_sources && cd /tmp/ffmpeg_sources && \
-    curl -fsSL http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 | tar -xj --strip-components=1 && \
+    curl -fsSL https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 | tar -xj --strip-components=1 && \
     ./configure \
       --prefix=/usr/local \
       --disable-shared \
