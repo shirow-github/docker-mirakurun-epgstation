@@ -1,7 +1,5 @@
 # v2 から v3 への移行
 
-EPGStation 側の変更点は [EPGStation の移行ドキュメント](https://github.com/l3tnun/EPGStation/blob/master/docs/migration-v2-to-v3.md) も参照してください。
-
 ## 1. バックアップ
 
 作業前に次をバックアップしてください。
